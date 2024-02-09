@@ -17,11 +17,14 @@ export default App;
 - Start extracting provided `ui` into different components
 - Populate the app with provided static data.
 - Make `Add Product` button toggle the `AddProductForm`
-- Make `Edit` button toggle the `EditProductForm`.
 
+- Fetch products from server to display existing products
 - Create Product
-- Edit Product
 - Delete Product
+
+- If I have time: 
+- Make `Edit` button toggle the `EditProductForm`.
+- Edit Product
 - Add Product to Cart
 - View all products and cart items
 */
