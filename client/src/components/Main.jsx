@@ -1,5 +1,6 @@
 import {
-  getProducts
+  getProducts,
+  createProduct
 } from "../services/products";
 import ListProducts from "./ListProducts";
 import AddProduct from "./AddProduct";
@@ -14,7 +15,6 @@ export default function Main() {
     const fetchProducts = async () => {
       try {
         const currProducts = await getProducts();
-        console.log(currProducts);
         setProducts(currProducts);
       } catch (err) {
         console.error(err); // TODO: want error component eventually
@@ -24,10 +24,20 @@ export default function Main() {
     fetchProducts();
   }, []);
 
+  const handleSubmit = async(newProduct, handleReset) => {
+    try {
+      const product = await createProduct(newProduct);
+      setProducts(products.concat(product));
+      if (handleReset) handleReset();
+    } catch (err) {
+      console.error(err); // TODO: want error component eventually
+    }
+  };
+
   return (
     <main>
       <ListProducts products={products} />
-      <AddProduct />
+      <AddProduct onSubmit={handleSubmit}/>
     </main>
   );
 }
