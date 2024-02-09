@@ -1,11 +1,12 @@
-import AddProduct from "./AddProduct";
+// import AddProduct from "./AddProduct";
+import AddProduct from "./SrdAddProduct";
 import productData from "../mockData/data"; 
 import { useState } from "react";
 
 export default function Main() {
   return (
     <main>
-      <ListProducts products={productData} />
+      {/* <ListProducts products={productData} /> */}
       <AddProduct />
     </main>
   );
