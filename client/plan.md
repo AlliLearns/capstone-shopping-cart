@@ -3,8 +3,9 @@
 - [x] Display cart (from static data)
 - [ ] Display products (from database)
   - [x] Make function to retrieve products from database
-- [ ] Display cart (from database)
+- [x] Display cart (from database)
   - [x] Make function to retrieve cart from database
+  - [x] Create state and effect to control cart info from database
 - [ ] Display Add Product form from "add new product" button
 - [ ] Hide Add Product form from "cancel" button
 - [ ] Add a new product to database from form from "add" button

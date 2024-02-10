@@ -33,13 +33,13 @@ export const deleteProduct = async (productId) => {
 
 // cart
 export const getCart = async () => {
-  const cart = await axios.get("/api/cart", { proxy });
+  const cart = await axios.get("/api/cart");
   if (!cart?.data) return [];
   return cart.data;
 }
 
 export const addToCart = async (productId) => {
-  const result = await axios.post("/api/add-to-cart", { productId }, { proxy });
+  const result = await axios.post("/api/add-to-cart", { productId });
   if (!result) return "";
   return result.data;
 }
