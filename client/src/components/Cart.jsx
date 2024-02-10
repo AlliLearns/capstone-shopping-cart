@@ -37,7 +37,7 @@ function CartWithItems({ cartData }) {
         </tbody>
         <tfoot>
             <tr>
-              <td colspan="3" className="total">{`Total: $${Math.trunc(total)}`}</td>
+              <td colSpan="3" className="total">{`Total: $${Math.trunc(total)}`}</td>
             </tr>
           </tfoot>
       </table>
