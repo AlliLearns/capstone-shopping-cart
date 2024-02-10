@@ -18,26 +18,26 @@ const proxy = {
 
 export const getProducts = async () => {
   const products = await axios.get("/api/products", { proxy });
-  if (!products) return [];
+  if (!products?.data) return [];
   return products.data;
 }
 
 export const createProduct = async (newProduct) => {
   const result = await axios.post("/api/products", {...newProduct}, { proxy });
-  if (!result) return {};
+  if (!result?.data) return {};
   return result.data;
 };
 
 export const updateProduct = async (productId, newProduct) => {
   const result = await axios.put(`/api/products/${productId}`, { ...newProduct }, { proxy });
   console.log("result of updated product is: ", result.data);
-  if (!result) return "";
+  if (!result?.data) return "";
   return result.data;
 }
 
 export const deleteProduct = async (productId) => {
   const result = await axios.delete(`/api/products/${productId}`, { proxy });
-  if (!result) return "";
+  if (!result?.data) return "";
   return result.data;
 } 
 
@@ -80,5 +80,29 @@ async function testDeleteProduct(productId) {
 /* cart {
 
 }
-
 */
+
+
+export async function getCart() {
+  // const cart = await axios.get("/api/cart", { proxy });
+  const cart = undefined;
+  // console.log("the cart currently is: ", cart);
+  if (!cart?.data) return [];
+  return cart.data;
+}
+
+export async function addToCart(productId) {
+  const result = await axios.post("/api/add-to-cart", { productId }, { proxy });
+  console.log("result of adding to cart is: ", result);
+}
+
+
+testCart();
+
+async function testCart() {
+  // const newProduct = await testCreateProduct();
+  // await addToCart(newProduct._id);
+  console.log("return of cart: ", await getCart());
+}
+
+function testAddToCart() {}
