@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-export default function ListProducts({ onDelete, products }) {
+export default function ListProducts({ products, onDelete, onUpdate }) {
 
   return (
     <div className="product-listing">
       <h2>Products</h2>
       <ul className="product-list">
-        {products.map(item => <Product item={item} onDelete={onDelete} key={item._id}/>)}
+        {products.map(item => <Product item={item} onDelete={onDelete} onUpdate={onUpdate} key={item._id}/>)}
       </ul>
     </div>
   );
 }
 
-function Product({ item, onDelete }) {
+function Product({ item, onDelete, onUpdate }) {
   const [showEdit, setShowEdit] = useState(false);
 
   const handleShowEdit = (event) => {
@@ -35,34 +35,40 @@ function Product({ item, onDelete }) {
         <div className="actions product-actions">
           <button className="add-to-cart">Add to Cart</button>
           <button className="edit" onClick={handleShowEdit}>Edit</button>
-          {showEdit ? <EditProductForm setShowEdit={setShowEdit}/> : null}
+          {showEdit ? <EditProductForm item={item} setShowEdit={setShowEdit} onUpdate={onUpdate}/> : null}
         </div>
         <button className="delete-button" onClick={handleDelete}><span>X</span></button>
       </div>
     </li>);
 }
 
-function EditProductForm({ setShowEdit }) {
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
+function EditProductForm({ item, setShowEdit, onUpdate }) {
+  const [title, setTitle] = useState(item.title);
+  const [price, setPrice] = useState(item.price);
+  const [quantity, setQuantity] = useState(item.quantity);
 
   const handleHideEdit = (event) => {
     event.preventDefault()
     setShowEdit(false);
   }
 
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    const updatedProduct = { title, price, quantity }
+    onUpdate(item._id, updatedProduct);
+  }
+
   return (
     <div className="edit-form">
     <h3>Edit Product</h3>
-    <form>
+    <form onSubmit={handleUpdate} action="">
       <div className="input-group">
         <label htmlFor="product-name">Product Name</label>
         <input
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           id="product-name"
-          value="Apple 10.5-Inch iPad Pro"
+          // value="Apple 10.5-Inch iPad Pro"
           aria-label="Product Name"
         />
       </div>
@@ -73,7 +79,7 @@ function EditProductForm({ setShowEdit }) {
           type="number"
           onChange={(e) => setPrice(e.target.value)}
           id="product-price"
-          value="649.99"
+          // value="649.99"
           aria-label="Product Price"
         />
       </div>
@@ -84,7 +90,7 @@ function EditProductForm({ setShowEdit }) {
           type="number"
           onChange={(e) => setQuantity(e.target.value)}
           id="product-quantity"
-          value="2"
+          // value="2"
           aria-label="Product Quantity"
         />
       </div>

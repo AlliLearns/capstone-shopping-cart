@@ -47,9 +47,21 @@ export default function Main() {
     }
   };
 
+  const handleUpdate = async (productId, updatedProduct) => {
+    try {
+      console.log('updating product');
+      const idx = products.findIndex(item => item._id === productId);
+      const productsCopy = [...products];
+      productsCopy[idx] = updatedProduct;
+      setProducts(productsCopy);
+    } catch (err) {
+      console.error(err); // TODO: want error component eventually
+    }
+  }
+
   return (
     <main>
-      <ListProducts products={products} onDelete={handleDelete} />
+      <ListProducts products={products} onDelete={handleDelete} onUpdate={handleUpdate} />
       <AddProduct onSubmit={handleSubmit}/>
     </main>
   );

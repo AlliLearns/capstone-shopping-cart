@@ -17,3 +17,9 @@ export const deleteProduct = async (productId) => {
   if (!result) return "";
   return result.data;
 } 
+
+export const updateProduct = async (productId) => {
+  const result = await axios.put(`/api/products/${productId}`);
+  console.log("result is: ", result);
+  if (!result) return "";
+}
