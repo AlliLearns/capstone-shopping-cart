@@ -84,25 +84,27 @@ async function testDeleteProduct(productId) {
 
 
 export async function getCart() {
-  // const cart = await axios.get("/api/cart", { proxy });
-  const cart = undefined;
-  // console.log("the cart currently is: ", cart);
+  const cart = await axios.get("/api/cart", { proxy });
   if (!cart?.data) return [];
   return cart.data;
 }
 
 export async function addToCart(productId) {
   const result = await axios.post("/api/add-to-cart", { productId }, { proxy });
-  console.log("result of adding to cart is: ", result);
+  if (!result) return "";
+  return result.data;
 }
 
 
 testCart();
 
 async function testCart() {
-  // const newProduct = await testCreateProduct();
-  // await addToCart(newProduct._id);
-  console.log("return of cart: ", await getCart());
+  const newProduct = await testCreateProduct();
+  await testAddToCart(newProduct._id);
+  const cart = await getCart();
+  console.log("current cart is: ", cart);
 }
 
-function testAddToCart() {}
+async function testAddToCart(productId) {
+  await addToCart(productId);
+}

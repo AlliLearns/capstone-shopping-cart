@@ -30,3 +30,16 @@ export const deleteProduct = async (productId) => {
   if (!result?.data) return "";
   return result.data;
 } 
+
+// cart
+export const getCart = async () => {
+  const cart = await axios.get("/api/cart", { proxy });
+  if (!cart?.data) return [];
+  return cart.data;
+}
+
+export const addToCart = async (productId) => {
+  const result = await axios.post("/api/add-to-cart", { productId }, { proxy });
+  if (!result) return "";
+  return result.data;
+}
