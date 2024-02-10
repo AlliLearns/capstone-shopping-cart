@@ -43,6 +43,10 @@ function Product({ item, onDelete }) {
 }
 
 function EditProductForm({ setShowEdit }) {
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+
   const handleHideEdit = (event) => {
     event.preventDefault()
     setShowEdit(false);
@@ -56,6 +60,7 @@ function EditProductForm({ setShowEdit }) {
         <label htmlFor="product-name">Product Name</label>
         <input
           type="text"
+          onChange={(e) => setTitle(e.target.value)}
           id="product-name"
           value="Apple 10.5-Inch iPad Pro"
           aria-label="Product Name"
@@ -66,6 +71,7 @@ function EditProductForm({ setShowEdit }) {
         <label htmlFor="product-price">Price</label>
         <input
           type="number"
+          onChange={(e) => setPrice(e.target.value)}
           id="product-price"
           value="649.99"
           aria-label="Product Price"
@@ -76,6 +82,7 @@ function EditProductForm({ setShowEdit }) {
         <label htmlFor="product-quantity">Quantity</label>
         <input
           type="number"
+          onChange={(e) => setQuantity(e.target.value)}
           id="product-quantity"
           value="2"
           aria-label="Product Quantity"
