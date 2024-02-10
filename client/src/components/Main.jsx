@@ -1,6 +1,7 @@
 import {
   getProducts,
-  createProduct
+  createProduct,
+  deleteProduct,
 } from "../services/products";
 import ListProducts from "./ListProducts";
 import AddProduct from "./AddProduct";
@@ -24,7 +25,7 @@ export default function Main() {
     fetchProducts();
   }, []);
 
-  const handleSubmit = async(newProduct, handleReset) => {
+  const handleSubmit = async (newProduct, handleReset) => {
     try {
       const product = await createProduct(newProduct);
       setProducts(products.concat(product));
@@ -34,9 +35,21 @@ export default function Main() {
     }
   };
 
+  const handleDelete = async (productId) => {
+    try {
+      await deleteProduct(productId);
+      const idx = products.findIndex(item => item._id === productId);
+      const productsCopy = [...products];
+      productsCopy.splice(idx, 1);
+      if (idx > -1) setProducts(productsCopy);
+    } catch (err) {
+      console.error(err); // TODO: want error component eventually
+    }
+  };
+
   return (
     <main>
-      <ListProducts products={products} />
+      <ListProducts products={products} onDelete={handleDelete} />
       <AddProduct onSubmit={handleSubmit}/>
     </main>
   );

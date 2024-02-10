@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ListProducts({ products }) {
+export default function ListProducts({ onDelete, products }) {
   const [showEdit, toggleShowEdit] = useState(false);
 
   const handleToggleEdit = (event) => {
@@ -13,16 +13,22 @@ export default function ListProducts({ products }) {
       <h2>Products</h2>
       <ul className="product-list">
         {products.map(item => {
-          if (!showEdit) return <Product item={item} />
+          if (!showEdit) return <Product item={item} onDelete={onDelete} key={item._id}/>
         })}
       </ul>
     </div>
   );
 }
 
-function Product({ item }) {
+function Product({ item, onDelete }) {
+  const handleDelete = (event) => {
+    console.log(item);
+    event.preventDefault();
+    if (item._id) onDelete(item._id);
+  };
+
   return (
-    <li className="product" key={item.id}>
+    <li className="product">
       <div className="product-details">
         <h3>{item.title}</h3>
         <p className="price">{item.price}</p>
@@ -31,7 +37,7 @@ function Product({ item }) {
           <button className="add-to-cart">Add to Cart</button>
           <button className="edit">Edit</button>
         </div>
-        <button className="delete-button"><span>X</span></button>
+        <button className="delete-button" onClick={handleDelete}><span>X</span></button>
       </div>
     </li>);
 }

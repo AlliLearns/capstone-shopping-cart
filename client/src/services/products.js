@@ -12,7 +12,8 @@ export const createProduct = async (newProduct) => {
   return result.data;
 };
 
-// export const deleteProduct = async (productId) => {
-//   const result = await axios.delete(`/api/${productId}`);
-//   console.log("result of deletion is: ", result);
-// } 
+export const deleteProduct = async (productId) => {
+  const result = await axios.delete(`/api/products/${productId}`);
+  if (!result) return "";
+  return result.data;
+} 
