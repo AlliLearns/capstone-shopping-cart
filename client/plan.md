@@ -6,9 +6,9 @@
 - [x] Display cart (from database)
   - [x] Make function to retrieve cart from database
   - [x] Create state and effect to control cart info from database
-- [ ] Display Add Product form from "add new product" button
-- [ ] Hide Add Product form from "cancel" button
-- [ ] Add a new product to database from form from "add" button
+- [x] Display Add Product form from "add new product" button
+- [x] Hide Add Product form from "cancel" button
+- [ ] Add a new product to database from "Add product form" "add" button
   - [x] Make function to add new product to database
 - [ ] Show Edit Product form on each product from "edit" button
 - [ ] Hide Edit Product form on each product from "cancel" button

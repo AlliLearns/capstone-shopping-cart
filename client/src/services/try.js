@@ -1,6 +1,6 @@
 export const tryAction = async (callback) => {
   try {
-    callback();
+    await callback();
   } catch (err) {
     console.error(err);
   }

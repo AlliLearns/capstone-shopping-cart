@@ -8,7 +8,7 @@ export default function Header() {
 
   useEffect(() => {
     const fetchCart = async () => {
-      tryAction(async () => setCart(await getCart()));
+      await tryAction(async () => setCart(await getCart()));
     }
 
     fetchCart();
