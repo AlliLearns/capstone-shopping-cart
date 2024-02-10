@@ -2,6 +2,7 @@ import ProductForm from "./ProductForm";
 import { useState } from "react";
 
 export default function AddProduct(props) {
+  const { onSubmit: handleSubmit } = props;
   const [showForm, setShowForm] = useState(false);
 
   const handleFormToggle = (event) => {
@@ -10,7 +11,11 @@ export default function AddProduct(props) {
   }
 
   if (!showForm) return <AddProductButton showForm={handleFormToggle}/>
-  return <ProductForm type={"Add"} hideForm={handleFormToggle}/>
+  return <ProductForm 
+    type={"Add"} 
+    hideForm={handleFormToggle} 
+    submitForm={handleSubmit}
+  />
 }
 
 function AddProductButton({ showForm }) {

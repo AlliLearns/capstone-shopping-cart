@@ -1,25 +1,62 @@
+import { useState } from "react";
+
 export default function ProductForm(props) {
-  const { type, title, price, quantity } = props;
-  const { hideForm } = props;
+  const { 
+    type, 
+    title, 
+    price, 
+    quantity,
+    hideForm,
+    submitForm,
+  } = props;
 
   const className = type === "Add" ? "add-form.visible" : "edit-form";
   const headingName = type === "Add" ? "Add Product" : "Edit Product";
   const submitType = type === "Add" ? "Add" : "Update";
-  const productTitle = title ? title : "";
-  const productPrice = price ? price : "";
-  const productQuantity = quantity ? quantity : "";
+
+  const [inputs, setInputs] = useState({
+    "product-name": title ? title : "",
+    "product-price": price ? price : "",
+    "product-quantity": quantity ? quantity : "",
+  });
+
+  const updateInputs = (event) => {
+    const newInputs = {...inputs};
+    newInputs[event.target.name] = event.target.value;
+    setInputs(newInputs);
+  } 
+
+  const resetForm = () => {
+    setInputs({
+      "product-name": "",
+      "product-price": "",
+      "product-quantity": "",
+    });
+  }
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const newProduct = {
+      title: inputs["product-name"], 
+      price: inputs["product-price"], 
+      quantity: inputs["product-quantity"],
+    };
+
+    submitForm(newProduct, resetForm);
+  }
 
   return (
     <div className={className}>
       <h3>{headingName}</h3>
-      <form action="">
+      <form onSubmit={handleFormSubmit} action="">
         <div className="input-group">
           <label htmlFor="product-name">Product Name:</label>
           <input
             type="text"
+            onChange={updateInputs}
             id="product-name"
             name="product-name"
-            // label={productTitle}
+            value={inputs["product-name"]}
             aria-label="Product Name"
             required
           />
@@ -29,11 +66,12 @@ export default function ProductForm(props) {
           <label htmlFor="product-price">Price:</label>
           <input
             type="number"
+            onChange={updateInputs}
             id="product-price"
             name="product-price"
             min="0"
             step="0.01"
-            // value={productPrice}
+            value={inputs["product-price"]}
             aria-label="Product Price"
             required
           />
@@ -43,10 +81,11 @@ export default function ProductForm(props) {
           <label htmlFor="product-quantity">Quantity:</label>
           <input
             type="number"
+            onChange={updateInputs}
             id="product-quantity"
             name="product-quantity"
             min="0"
-            // value={productQuantity}
+            value={inputs["product-quantity"]}
             aria-label="Product Quantity"
             required
           />
