@@ -35,14 +35,19 @@ function Product({ item, onDelete }) {
         <div className="actions product-actions">
           <button className="add-to-cart">Add to Cart</button>
           <button className="edit" onClick={handleShowEdit}>Edit</button>
-          {showEdit ? <EditProductForm /> : null}
+          {showEdit ? <EditProductForm setShowEdit={setShowEdit}/> : null}
         </div>
         <button className="delete-button" onClick={handleDelete}><span>X</span></button>
       </div>
     </li>);
 }
 
-function EditProductForm() {
+function EditProductForm({ setShowEdit }) {
+  const handleHideEdit = (event) => {
+    event.preventDefault()
+    setShowEdit(false);
+  }
+
   return (
     <div className="edit-form">
     <h3>Edit Product</h3>
@@ -79,7 +84,7 @@ function EditProductForm() {
 
       <div className="actions form-actions">
         <button type="submit">Update</button>
-        <button type="button">Cancel</button>
+        <button type="button" onClick={handleHideEdit}>Cancel</button>
       </div>
     </form>
     </div>
