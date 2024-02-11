@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function ProductForm(props) {
   const { 
     type, 
-    title, 
+    title,
     price, 
     quantity,
     hideForm,

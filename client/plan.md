@@ -1,11 +1,11 @@
 # Implement Features
-- [ ] Display products (from static data)
+- [x] Display products (from static data)
 - [x] Display cart (from static data)
-- [ ] Display products (from database)
+- [x] Display products (from database)
   - [x] Make state to hold and update products
   - [x] Make components that will display products
   - [x] Make function to retrieve products from database
-  - [ ] Make effect that retrives products from database
+  - [x] Make effect that retrives products from database
 - [x] Display cart (from database)
   - [x] Make function to retrieve cart from database
   - [x] Create state and effect to control cart info from database
@@ -17,8 +17,8 @@
   - [x] Set up state change for input values 
   - [x] Make function to add new product to database
   - [x] Make and connect handlers to submit new product to database
-- [ ] Show Edit Product form on each product from "edit" button
-- [ ] Hide Edit Product form on each product from "cancel" button
+- [x] Show Edit Product form on each product from "edit" button
+- [x] Hide Edit Product form on each product from "cancel" button
 - [ ] Update existing product in database from "update" button in Edit Product form
   - [x] Make form JSX
   - [x] Set up state for input values

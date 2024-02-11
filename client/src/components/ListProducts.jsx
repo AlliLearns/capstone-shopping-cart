@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ProductForm from "./ProductForm";
 
 export default function ListProducts(props) {
   console.log("list products run");
@@ -14,7 +15,6 @@ export default function ListProducts(props) {
 }
 
 function Product(props) {
-  console.log("product run")
   const { item } = props;
   const [showForm, setShowForm] = useState(false);
 
@@ -31,8 +31,16 @@ function Product(props) {
         <p className="quantity">{item.quantity} left in stock</p>
         <div className="actions product-actions">
           <button className="add-to-cart">Add to Cart</button>
-          {/* <button className="edit" onClick={handleShowEdit}>Edit</button> */}
-          {/* {showForm ? <EditProductForm item={item} setShowEdit={setShowEdit} onUpdate={onUpdate}/> : null} */}
+          <button className="edit" onClick={handleFormToggle}>Edit</button>
+          {!showForm ? 
+            null : 
+            <ProductForm 
+              title={item.title} 
+              price={item.price}
+              quantity={item.quantity}
+              hideForm={handleFormToggle}
+            />
+          }
         </div>
         {/* <button className="delete-button" onClick={handleDelete}><span>X</span></button> */}
       </div>
