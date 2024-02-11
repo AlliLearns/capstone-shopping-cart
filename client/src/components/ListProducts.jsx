@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProductForm from "./ProductForm";
 
 export default function ListProducts(props) {
-  const { products, onSubmit } = props;
+  const { products, onSubmit, onDelete } = props;
   return (
     <div className="product-listing">
       <h2>Products</h2>
@@ -10,6 +10,7 @@ export default function ListProducts(props) {
         {products.map(item => <Product 
           item={item} 
           handleEdit={onSubmit}
+          handleDelete={onDelete}
           key={item._id}
         />)}
       </ul>
@@ -18,12 +19,17 @@ export default function ListProducts(props) {
 }
 
 function Product(props) {
-  const { item, handleEdit } = props;
+  const { item, handleEdit, handleDelete } = props;
   const [showForm, setShowForm] = useState(false);
 
   const handleFormToggle = (event) => {
     event.preventDefault();
     setShowForm(prevState => !prevState);
+  }
+
+  const handleProductDelete = (event) => {
+    event.preventDefault();
+    if (item._id) handleDelete(item._id);
   }
 
   return (
@@ -47,7 +53,7 @@ function Product(props) {
             />
           }
         </div>
-        {/* <button className="delete-button" onClick={handleDelete}><span>X</span></button> */}
+        <button className="delete-button" onClick={handleProductDelete}><span>X</span></button>
       </div>
     </li>
   );

@@ -19,12 +19,12 @@
   - [x] Make and connect handlers to submit new product to database
 - [x] Show Edit Product form on each product from "edit" button
 - [x] Hide Edit Product form on each product from "cancel" button
-- [ ] Update existing product in database from "update" button in Edit Product form
+- [x] Update existing product in database from "update" button in Edit Product form
   - [x] Make form JSX
   - [x] Set up state for input values
   - [x] Set up state change for input values
   - [x] Make function to edit existing product in database
-  - [ ] Make and connect handlers to submit editted product to database
+  - [x] Make and connect handlers to submit editted product to database
 - [ ] Delete existing product in database from "delete" button in product list
   - [x] Make function to delete existing product from database
 - [ ] Add product to cart from "add to cart" buton

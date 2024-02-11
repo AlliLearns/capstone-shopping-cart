@@ -2,7 +2,7 @@ import ListProducts from "./ListProducts";
 import AddProduct from "./AddProduct";
 import { tryAction } from "../services/try";
 import { useEffect, useState } from "react";
-import { getProducts, createProduct, updateProduct } from "../services/products";
+import { getProducts, createProduct, updateProduct, deleteProduct } from "../services/products";
 
 export default function Content() {
   const [products, setProducts] = useState([]);
@@ -36,9 +36,23 @@ export default function Content() {
     });
   };
 
+  const handleDeletionOfExistingProduct = async (productId) => {
+    await tryAction(async () => {
+      await deleteProduct(productId);
+      const idx = products.findIndex(item => item._id === productId);
+      const productsCopy = [...products];
+      productsCopy.splice(idx, 1);
+      if (idx > -1) setProducts(productsCopy);
+    });
+  }
+
   return (
     <main>
-      <ListProducts products={products} onSubmit={handleEditOfExistingProduct}/>
+      <ListProducts 
+        products={products} 
+        onSubmit={handleEditOfExistingProduct}
+        onDelete={handleDeletionOfExistingProduct}
+      />
       <AddProduct onSubmit={handleSubmitOfNewProduct}/>
     </main>
   );
