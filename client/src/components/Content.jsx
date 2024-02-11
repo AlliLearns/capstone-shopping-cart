@@ -1,10 +1,22 @@
-import AddProduct from "../components/AddProduct";
-import { createProduct } from "../services/products";
+import ListProducts from "./ListProducts";
+import AddProduct from "./AddProduct";
 import { tryAction } from "../services/try";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getProducts, createProduct } from "../services/products";
 
 export default function Content() {
   const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await tryAction(async () => {
+        const currProducts = await getProducts();
+        setProducts(currProducts);
+      });
+    }
+
+    fetchProducts();
+  }, []);
 
   const handleSubmitOfNewProduct = async (newProduct, resetForm) => {
     await tryAction(async () => {
@@ -16,6 +28,7 @@ export default function Content() {
 
   return (
     <main>
+      <ListProducts products={products}/>
       <AddProduct onSubmit={handleSubmitOfNewProduct}/>
     </main>
   );

@@ -19,7 +19,6 @@ export default function AddProduct(props) {
 }
 
 function AddProductButton({ showForm }) {
-  console.log('displaying add product button');
   return (
     <div className="add-form.visible">
       <p><button className="add-product-button" onClick={showForm}>Add A Product</button></p>
