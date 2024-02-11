@@ -2,20 +2,23 @@ import { useState } from "react";
 import ProductForm from "./ProductForm";
 
 export default function ListProducts(props) {
-  console.log("list products run");
-  const { products } = props;
+  const { products, onSubmit } = props;
   return (
     <div className="product-listing">
-    <h2>Products</h2>
-    <ul className="product-list">
-      {products.map(item => <Product item={item} key={item._id}/>)}
-    </ul>
-  </div>
+      <h2>Products</h2>
+      <ul className="product-list">
+        {products.map(item => <Product 
+          item={item} 
+          handleEdit={onSubmit}
+          key={item._id}
+        />)}
+      </ul>
+    </div>
   );
 }
 
 function Product(props) {
-  const { item } = props;
+  const { item, handleEdit } = props;
   const [showForm, setShowForm] = useState(false);
 
   const handleFormToggle = (event) => {
@@ -35,10 +38,12 @@ function Product(props) {
           {!showForm ? 
             null : 
             <ProductForm 
+              productId={item._id}
               title={item.title} 
               price={item.price}
               quantity={item.quantity}
               hideForm={handleFormToggle}
+              submitForm={handleEdit}
             />
           }
         </div>

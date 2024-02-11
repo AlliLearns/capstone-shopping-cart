@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function ProductForm(props) {
   const { 
     type, 
+    productId,
     title,
     price, 
     quantity,
@@ -10,13 +11,13 @@ export default function ProductForm(props) {
     submitForm,
   } = props;
 
-  const className = type === "Add" ? "add-form.visible" : "edit-form";
+  const className   = type === "Add" ? "add-form.visible" : "edit-form";
   const headingName = type === "Add" ? "Add Product" : "Edit Product";
-  const submitType = type === "Add" ? "Add" : "Update";
+  const submitType  = type === "Add" ? "Add" : "Update";
 
   const [inputs, setInputs] = useState({
-    "product-name": title ? title : "",
-    "product-price": price ? price : "",
+    "product-name":     title ? title : "",
+    "product-price":    price ? price : "",
     "product-quantity": quantity ? quantity : "",
   });
 
@@ -42,7 +43,8 @@ export default function ProductForm(props) {
       quantity: inputs["product-quantity"],
     };
 
-    submitForm(newProduct, resetForm);
+    if (type === "Add") submitForm(newProduct, resetForm);
+    else                submitForm(productId, newProduct);
   }
 
   return (

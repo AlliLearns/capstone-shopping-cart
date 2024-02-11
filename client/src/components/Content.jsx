@@ -2,7 +2,7 @@ import ListProducts from "./ListProducts";
 import AddProduct from "./AddProduct";
 import { tryAction } from "../services/try";
 import { useEffect, useState } from "react";
-import { getProducts, createProduct } from "../services/products";
+import { getProducts, createProduct, updateProduct } from "../services/products";
 
 export default function Content() {
   const [products, setProducts] = useState([]);
@@ -24,11 +24,21 @@ export default function Content() {
       setProducts(products.concat(product));
       if (typeof resetForm === "function") resetForm();
     });
-  }
+  };
+
+  const handleEditOfExistingProduct = async (productId, updatedProduct) => {
+    await tryAction(async () => {
+      await updateProduct(productId, updatedProduct);
+      const idx = products.findIndex(item => item._id === productId);
+      const productsCopy = [...products];
+      productsCopy[idx] = updatedProduct;
+      setProducts(productsCopy);
+    });
+  };
 
   return (
     <main>
-      <ListProducts products={products}/>
+      <ListProducts products={products} onSubmit={handleEditOfExistingProduct}/>
       <AddProduct onSubmit={handleSubmitOfNewProduct}/>
     </main>
   );
