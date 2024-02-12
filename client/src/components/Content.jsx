@@ -2,7 +2,13 @@ import ListProducts from "./ListProducts";
 import AddProduct from "./AddProduct";
 import { tryAction } from "../services/try";
 import { useEffect, useState } from "react";
-import { getProducts, createProduct, updateProduct, deleteProduct } from "../services/products";
+
+import { 
+  getProducts, 
+  createProduct, 
+  updateProduct, 
+  deleteProduct 
+} from "../services/products";
 
 export default function Content() {
   const [products, setProducts] = useState([]);

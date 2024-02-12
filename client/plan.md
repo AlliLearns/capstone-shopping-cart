@@ -25,8 +25,10 @@
   - [x] Set up state change for input values
   - [x] Make function to edit existing product in database
   - [x] Make and connect handlers to submit editted product to database
-- [ ] Delete existing product in database from "delete" button in product list
+- [x] Delete existing product in database from "delete" button in product list
+  - [x] Show delete button with each product
   - [x] Make function to delete existing product from database
+  - [x] Make and connect handlers to delete existing product from database
 - [ ] Add product to cart from "add to cart" buton
   - [x] Make function to add product to cart in database
 - [ ] Implement "checkout" -> not sure what this is yet. 
